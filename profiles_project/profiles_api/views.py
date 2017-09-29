@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render
 
+from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -52,3 +53,18 @@ class HelloApiView(APIView):
     def delete(self , request , pk=None):
         """ deletes an object """
         return Response({'message':'delete'})
+
+
+
+
+class HelloViewSet(viewsets.ViewSet):
+    """" Test api viewsets """
+
+    def list(self , request):
+        """ returns hello message """
+        a_viewsets = [
+                    'user action (list, create, retrive, updat, partial update, destroy)',
+                    'automatically maps to URLs using router',
+                    'provides more functionality with less code'
+                ]
+        return Response({'message': 'Hello from viewsets','a_viewsets':a_viewsets})
