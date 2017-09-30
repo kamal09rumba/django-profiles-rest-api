@@ -58,3 +58,15 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
     def __str__(self):
         """ django uses this when it requires to convert OBJECT into a STRING """
         return self.email
+
+
+class ProfileFeedItem(models.Model):
+    """ Profile user update """
+    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    #On deleteing profile all the profile status is also delete
+    status_text  = models.CharField(max_length=255)
+    created_on   = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self): #converts python object into a STRING
+        return self.status_text
+
