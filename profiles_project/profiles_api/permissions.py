@@ -12,3 +12,16 @@ class UpdateOwnProfile(permissions.BasePermission):
 
         return obj.id == request.user.id
 
+
+
+# permission for profile feed item
+
+class PostOwnStatus(permissions.BasePermission):
+    """" allow user to update their own profile feed """
+
+    def has_object_permission(self, request, view, obj):
+        """ check the user is trying to update thier own status """
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        return obj.user_profile.id == request.user.id
